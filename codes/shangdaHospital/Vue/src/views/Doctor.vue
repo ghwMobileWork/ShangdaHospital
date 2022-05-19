@@ -69,6 +69,9 @@
             <el-option label="内科" value="内科" />
             <el-option label="妇科" value="妇科" />
             <el-option label="骨科" value="骨科" />
+            <el-option label="儿科" value="儿科" />
+            <el-option label="皮肤科" value="皮肤科" />
+            <el-option label="耳鼻喉科" value="耳鼻喉科" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -100,7 +103,7 @@ export default {
       pageSize: 10,
       total: 0,
       tableData: [],
-
+      department: [],
     }
 
   },
@@ -122,6 +125,7 @@ export default {
         this.tableData = res.data.records
         this.total = res.data.total
       })
+
     },
     save() {
       if (this.form.id) {

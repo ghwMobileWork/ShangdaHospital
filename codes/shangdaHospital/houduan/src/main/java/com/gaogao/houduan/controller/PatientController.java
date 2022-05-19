@@ -41,16 +41,16 @@ public class PatientController {
         }
         return Result.success(res);
     }
-//    @PostMapping("/register")
-//    public Result<?> register(@RequestBody Doctor doctor) {
-//        Doctor res = doctorMapper.selectOne(Wrappers.<Doctor>lambdaQuery().eq(Doctor::getUsername, doctor.getUsername()));
-//        if (res!=null){
-//            return Result.error("-1","用户名已存在");
-//        }
-//
-//        doctorMapper.insert(doctor);
-//        return Result.success();
-//    }
+    @PostMapping("/register")
+    public Result<?> register(@RequestBody Patient doctor) {
+        Patient res = patientMapper.selectOne(Wrappers.<Patient>lambdaQuery().eq(Patient::getUsername, doctor.getUsername()));
+        if (res!=null){
+            return Result.error("-1","用户名已存在");
+        }
+
+        patientMapper.insert(doctor);
+        return Result.success();
+    }
 
 //    @PutMapping
 //    public Result<?> update(@RequestBody Patient patient) {
@@ -64,15 +64,15 @@ public class PatientController {
 //    }
 //
 //
-//    @GetMapping("/loadall")
-//    public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
-//                             @RequestParam(defaultValue = "10") Integer pageSize)
-//    {
-//
-//        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
-//        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
-//        return Result.success(patientPage);
-//    }
+    @GetMapping("/loadall")
+    public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize)
+    {
+
+        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
+        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(patientPage);
+    }
 //    @GetMapping("/findbyname")
 //    public Result<?> findByname(@RequestParam(defaultValue = "1") Integer pageNum,
 //                                @RequestParam(defaultValue = "10") Integer pageSize,

@@ -70,5 +70,17 @@ public class DoctorController {
         Page<Doctor> doctorPage = doctorMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(doctorPage);
     }
+    @GetMapping("/findbydepartment")
+    public Result<?> findBydepartment(@RequestParam(defaultValue = "1") Integer pageNum,
+                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                @RequestParam(defaultValue = "") String search) {
+        System.out.println(search);
+        LambdaQueryWrapper<Doctor> wrapper=Wrappers.<Doctor>lambdaQuery();
+        if (StrUtil.isNotBlank(search)){
+            wrapper.eq(Doctor::getDepartment,search);
 
+        }
+        Page<Doctor> doctorPage = doctorMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(doctorPage);
+    }
 }

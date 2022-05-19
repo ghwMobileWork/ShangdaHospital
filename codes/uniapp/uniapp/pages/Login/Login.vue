@@ -19,7 +19,7 @@
 
 
 		<view class="" style="margin-top: 30upx;">
-			<text style="color: #808080;font-size: 30upx;margin-left: 200upx; " @tap="">注册</text>
+			<text style="color: #808080;font-size: 30upx;margin-left: 200upx; " @tap="toregister">注册</text>
 			<text style="color: #808080;font-size: 30upx;margin-left: 200upx; " @tap="">忘记密码</text>
 
 		</view>
@@ -40,23 +40,32 @@
 		},
 		methods: {
 			login() {
+		
 				request.post("/patient/login", this.form).then(res => {
 					console.log(res)
-
+				
 					if (res.code === '0') {
-						sessionStorage.setItem("user", JSON.stringify(res.data)) //缓存用户信息，注意session的key是user
+						sessionStorage.setItem("user", JSON.stringify(res.data))
+						//缓存用户信息，注意session的key是user
 						//登录成功后进行页面跳转
-						// this.successToast(res.msg)
-						uni.switchTab({
-							url: '../index/index'
-						})
+						this.successToast('欢迎您,'+res.data.patientName+'！')
+						
+						// uni.switchTab({
+						// 	url: '../index/index'
+						// })
 
-					} else {//登录失败
+					} else { //登录失败
 						this.failToast(res.msg)
-						this.form.password=''//清空密码栏
+						this.form.password = '' //清空密码栏
 						console.log(res.msg)
 					}
 
+				})
+			},
+			toregister(){
+				this.form={}
+				uni.navigateTo({
+					url:'../register/register'
 				})
 			},
 			failToast(msg) {
@@ -67,15 +76,18 @@
 					position: 'bottom',
 				})
 			},
-			// successToast(msg) {
-			// 	this.$refs.uToast.show({
-			// 		title: msg,
-			// 		type: 'success',
-			// 		url: '../index/index',
-			// 		position: 'bottom',
-			// 		isTab:true
-			// 	})
-			// },
+			successToast(msg) {
+				this.$refs.uToast.show({
+					isTab:true,
+					title: msg,
+					type: 'success',
+					url: '/pages/index/index',
+					position: 'bottom',
+					duration:1000,
+					
+				})
+			},
+			
 		},
 
 	}

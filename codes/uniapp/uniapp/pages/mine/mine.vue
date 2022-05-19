@@ -18,7 +18,10 @@
 		<u-cell-group style="margin-top:50upx;">
 			<u-cell-item icon="setting-fill" title="修改名称"></u-cell-item>
 			<u-cell-item icon="lock-fill" title="修改密码"></u-cell-item>
+			<u-cell-item icon="close" title="退出登陆" @tap="tishikuang"></u-cell-item>
 		</u-cell-group>
+		<!-- 退出登陆提示框 -->
+		<u-modal v-model="show" :content="content" @confirm="exit" show-cancel-button></u-modal>
 	</view>
 </template>
 
@@ -30,6 +33,8 @@
 					backgroundColor: '#eeeeee',
 
 				},
+				show: false,
+				content:'确定退出登陆吗？',
 				imgsrc: '',
 				sex:'',
 				username: '',
@@ -41,9 +46,9 @@
 			this.username= JSON.parse(sessionStorage.getItem('user')).username.toString(),
 			this.patientname=JSON.parse(sessionStorage.getItem('user')).patientName.toString()
 			this.load()
-			console.log(JSON.parse(sessionStorage.getItem('user')).sex.toString())
-			console.log(JSON.parse(sessionStorage.getItem('user')).username.toString())
-			console.log(JSON.parse(sessionStorage.getItem('user')).patientName.toString())
+			// console.log(JSON.parse(sessionStorage.getItem('user')).sex.toString())
+			// console.log(JSON.parse(sessionStorage.getItem('user')).username.toString())
+			// console.log(JSON.parse(sessionStorage.getItem('user')).patientName.toString())
 			
 		  },
 		methods: {
@@ -56,7 +61,17 @@
 					this.imgsrc = '../../static/icons/female.png'
 				}
 
+			},
+			tishikuang(){
+				this.show = true;
+			},
+			exit(){
+			sessionStorage.clear()
+			uni.navigateTo({
+				url:"../Login/Login"
+			})
 			}
+			
 		}
 	}
 </script>

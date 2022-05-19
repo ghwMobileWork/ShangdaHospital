@@ -10,7 +10,6 @@
         <el-menu-item  index="/doctor">医生管理</el-menu-item>
 <!--        index路由就是index.js里path路由。前提开启el-menu里的router-->
         <el-menu-item index="/patient">病人管理</el-menu-item>
-        <el-menu-item index="1-3">item three</el-menu-item>
       </el-sub-menu>
       <el-menu-item index="/yuyue">预约查看</el-menu-item>
     </el-menu>
