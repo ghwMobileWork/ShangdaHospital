@@ -49,7 +49,7 @@
 						//缓存用户信息，注意session的key是user
 						//登录成功后进行页面跳转
 						this.successToast('欢迎您,'+res.data.patientName+'！')
-						
+						this.form={}
 						// uni.switchTab({
 						// 	url: '../index/index'
 						// })

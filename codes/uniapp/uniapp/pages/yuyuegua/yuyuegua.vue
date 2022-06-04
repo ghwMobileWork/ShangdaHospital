@@ -7,7 +7,7 @@
 			<u-tabs-swiper ref="uTabs" :list="dptlist" :current="current" @change="tabsChange" :is-scroll="true"
 				swiperWidth="750" bg-color="#eeeeee"></u-tabs-swiper>
 		</view>
-		<view style="height: 1000rpx;width: 100%;">
+		<view style="height:20rpx;width: 100%;">
 			<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
 				<swiper-item style="width: 100%;" class="swiper-item" v-for="(item, index) in tabs" :key="index">
 					<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
@@ -16,27 +16,24 @@
 							<image v-if="tabs[index][idx].sex==='男'" src="../../static/icons/mandoct.png"
 								class="img-80" />
 							<image v-else src="../../static/icons/womandoct.png" class="img-80" />
-							<view class="title-wrap" style="width: 200rpx;font-size: 35rpx;padding-left: 50rpx;">
+							<view class="title-wrap" style="width: 300rpx;font-size: 35rpx;padding-left: 50rpx;">
 								<text class="title u-line-2">{{tabs[index][idx].doctorName}}</text>
 							</view>
-							<button type="primary">预约</button>
-						</view>
-						<!-- <view class="item u-border-bottom">
-							<image src="../../static/icons/womandoct.png" class="img-80" />
+							<button type="primary" @tap="yuyue(tabs[index][idx].id)">预约</button>
 							
-			
-							<view class="title-wrap">
-								<text class="title u-line-2">{{current}}{{tabs[current]}}</text>
-							</view>
-						</view> -->
+							
+						</view>
 
 					</scroll-view>
 				</swiper-item>
 			</swiper>
 		</view>
 
-
+		<u-picker  mode="time" :end-year="endyear" :start-year="startyear" v-model="show" @confirm="confirm" @change="change"
+			:params="params"></u-picker>
+			<u-toast ref="uToast" />
 	</view>
+	
 </template>
 
 
@@ -45,7 +42,17 @@
 	export default {
 		data() {
 			return {
-
+				params: {
+					year: true,
+					month: true,
+					day: true,
+					hour: true,
+					minute: false,
+					second: false
+				},
+				show: false,
+				startyear: 0,
+				endyear: 0,
 				background: {
 					backgroundColor: '#eeeeee',
 
@@ -61,148 +68,40 @@
 				//下面的内容
 				tabs: [],
 				doctors: [],
+				selectdoc:0,
+				userid:0,
+				
 			}
 		},
 		onLoad() {
-			this.current = 0
-			this.swiperCurrent = 0
-			this.tabs = []
-			this.dptlist = []
-			//获取各科室医生的信息存入doctors
-			request.get("/doctor/loadall", {
-				params: {
-					pageNum: 1,
-					pageSize: 20,
-					
-				}
-			}).then(res => {
-				//异步问题	
-				// console.log(res.data.records)
-				this.doctors=res.data.records
-				// console.log(this.doctors)
-								
-				// this.tabs.splice(i, 1, res.data.records)
-			})
+			this.load()
 			
-				// console.log(this.doctors)
-				// this.doctors.forEach((doctor, idx)=> {
-				// 	// console.log(doctor)
-					
-					
-				// })
-				
-					
-				
-				//获取科室信息
-				request.get("/department/getdpt").then(res => {
-					// console.log(res.data.records)
-					for (var i = 0; i < res.data.total; i++) {
-						var dptname = res.data.records[i].department
-						var dpt = {
-							name: dptname
-						}
-						this.dptlist.push(dpt)
-						var tab=[]
-						this.doctors.forEach((doctor, idx)=> {
-							
-							if(doctor.department==dptname)
-							{
-								console.log(doctor)
-								tab.push(doctor)
-							}
-							
-						})
-						this.tabs.push(tab)
-				
-					}
-					// this.dptlist.forEach((x, index)=> {
-					// 	console.log(x + '|' + index + '|');
-					// 	var dptname = x.name
-					// 	console.log(dptname + '|' + index + '|');
-					// 	request.get("/doctor/findbydepartment", {
-					// 		params: {
-					// 			pageNum: 1,
-					// 			pageSize: 20,
-					// 			search: dptname
-					// 		}
-					// 	}).then(res => {
-					// 		//异步问题	
-					// 		// console.log(res.data.records)
-							
-					// 		// this.tabs.push(tab)
-					// 		this.tabs.splice(index, 1, res.data.records)
-					// 	})
-					// })
-					
-						
-						// console.log(dptname)
-						
-						//dptlist是对象
-						
-						
-						// for(var i = 0; i < this.dptlist.length; i++){
-						// 	var department=this.dptlist[i]
-						// 	var tab=[]
-						// 	this.doctors.forEach((x, index)=> {
-						// 		console.log(x)
-						// 		if(x.department==department)
-						// 		tab.push(x)
-						// 	})
-						// 	this.tabs.push(tab)
-						// }
-						// this.tabs.forEach((x, index)=> {
-						// 	console.log(x + '|' + index + '|');
-						// 	var dptname = x.name
-						// 	console.log(dptname + '|' + index + '|');
-						// 	request.get("/doctor/findbydepartment", {
-						// 		params: {
-						// 			pageNum: 1,
-						// 			pageSize: 20,
-						// 			search: dptname
-						// 		}
-						// 	}).then(res => {
-						// 		//异步问题	
-						// 		// console.log(res.data.records)
-								
-						// 		// this.tabs.push(tab)
-						// 		this.tabs.splice(index, 1, res.data.records)
-						// 	})
-						// })
-						// var data={}
-						// var res= await request.get("/doctor/findbydepartment", {
-						// 	params: {
-						// 		pageNum: 1,
-						// 		pageSize: 20,
-						// 		search: dptname
-						// 	}
-						// })
-						// data=res.data.records
-						// this.tabs.splice(i, 1, res.data.records)
-					
-					// console.log(this.tabs)
-				})
-				// console.log('------tabs------')
-				// console.log(this.tabs)
-				// console.log('------dptlst------')
-				// console.log(this.dptlist)
-				
-							
-			
-			
-				
-			
-			
-
-
+		},
+		onPullDownRefresh(){
+			this.load()
+			uni.stopPullDownRefresh()
 		},
 		methods: {
-			//获取科室医生方法
-			// getDocts(department) {
-			// 	request.get("/doctor/findbydepartment", department).then(res => {
-			// 		console.log(res.data.records)
-
-			// 	})
-			// },
+			//预约失败的toast
+			failToast(msg) {
+				this.$refs.uToast.show({
+					title: msg,
+					type: 'error',
+					// url: '../index/index',
+					position: 'bottom',
+				})
+			},
+			//预约成功的toast
+			successToast(msg) {
+				this.$refs.uToast.show({
+					title: msg,
+					type: 'success',
+					//url: '/pages/index/index',
+					position: 'bottom',
+					//duration:1000,
+					
+				})
+			},
 			tabsChange(index) {
 				this.swiperCurrent = index;
 
@@ -225,8 +124,112 @@
 			onreachBottom() {
 
 			},
+			yuyue(e){
+				this.show=true
+				// console.log("doctorid:"+e);
+				// console.log("patientid:"+this.userid);
+				this.selectdoc=e
+			},
+			
+			confirm(e) {
+				
+				var patient=JSON.parse(sessionStorage.getItem('user')).id.toString()
+				let time = e.year + '-' + e.month + '-' + e.day + ' ' + e.hour + ':00:00';
+				var yuyue={
+					patientId:this.userid,
+					doctorId:this.selectdoc,
+					statue:0,
+					time:time
+				}
+				request.post("/yuyue/newyuyue", yuyue).then(res => {
+					console.log(res)
+					if (res.code === '0') {
+						this.successToast("预约成功！")
+				
+					} else { 
+						this.failToast("预约失败！")
+					}
+				
+				})
+				// console.log(yuyue);
 
-
+			},
+			// 用户更改picker的列选项
+			change(e) {
+				this.valueArr = e.detail.value;
+				let i = 0;
+				if (this.mode == 'time') {
+					// 这里使用i++，是因为this.valueArr数组的长度是不确定长度的，它根据this.params的值来配置长度
+					// 进入if规则，i会加1，保证了能获取准确的值
+					if (this.params.year) this.year = this.years[this.valueArr[i++]];
+					if (this.params.month) this.month = this.months[this.valueArr[i++]];
+					if (this.params.day) this.day = this.days[this.valueArr[i++]];
+					if (this.params.hour) this.hour = this.hours[this.valueArr[i++]];
+					if (this.params.minute) this.minute = this.minutes[this.valueArr[i++]];
+					if (this.params.second) this.second = this.seconds[this.valueArr[i++]];
+				} else if (this.mode == 'region') {
+					if (this.params.province) this.province = this.valueArr[i++];
+					if (this.params.city) this.city = this.valueArr[i++];
+					if (this.params.area) this.area = this.valueArr[i++];
+				} else if (this.mode == 'multiSelector') {
+					let index = null;
+					// 对比前后两个数组，寻找变更的是哪一列，如果某一个元素不同，即可判定该列发生了变化
+					this.defaultSelector.map((val, idx) => {
+						if (val != e.detail.value[idx]) index = idx;
+					});
+					// 为了让用户对多列变化时，对动态设置其他列的变更
+					if (index != null) {
+						this.$emit('columnchange', {
+							column: index,
+							index: e.detail.value[index]
+						});
+					}
+				}
+			},
+			load(){
+				this.current = 0
+				this.swiperCurrent = 0
+				this.tabs = []
+				this.dptlist = []
+				this.userid=JSON.parse(sessionStorage.getItem('user')).id
+				//获取各科室医生的信息存入doctors
+				request.get("/doctor/loadall", {
+					params: {
+						pageNum: 1,
+						pageSize: 30,
+						
+					}
+				}).then(res => {
+					//异步问题	
+					// console.log(res.data.records)
+					this.doctors=res.data.records
+					// console.log(this.doctors)
+									
+					// this.tabs.splice(i, 1, res.data.records)
+				})
+					//获取科室信息
+					request.get("/department/getdpt").then(res => {
+						// console.log(res.data.records)
+						for (var i = 0; i < res.data.total; i++) {
+							var dptname = res.data.records[i].department
+							var dpt = {
+								name: dptname
+							}
+							this.dptlist.push(dpt)
+							var tab=[]
+							this.doctors.forEach((doctor, idx)=> {
+								
+								if(doctor.department==dptname)
+								{
+									// console.log(doctor)
+									tab.push(doctor)
+								}
+								
+							})
+							this.tabs.push(tab)				
+						}
+					})		
+			}
 		}
 	}
 </script>
@@ -253,15 +256,5 @@
 		border-radius: 8rpx;
 	}
 
-	.bg-purple {
-		background: #d3dce6;
-	}
-
-	.bg-purple-light {
-		background: #e5e9f2;
-	}
-
-	.bg-purple-dark {
-		background: #99a9bf;
-	}
+	
 </style>

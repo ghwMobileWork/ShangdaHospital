@@ -20,11 +20,12 @@
             <result column="d_id" property="id"/>
             <result column="doctor_name" property="doctorName"/>
             <result column="department" property="department"/>
+            <result column="d_sex" property="sex"/>
         </collection>
         <collection property="patientList" javaType="ArrayList" ofType="com.gaogao.houduan.entity.Patient">
             <result column="p_id" property="id"/>
             <result column="patient_name" property="patientName"/>
-            <result column="sex" property="sex"/>
+            <result column="p_sex" property="sex"/>
         </collection>
     </resultMap>
 
@@ -36,11 +37,25 @@
                doctor.department,
                patient.id as p_id,
                patient_name,
-               patient.sex
+               patient.sex as p_sex
         FROM yuyue
                  INNER JOIN doctor on doctor.id = doctor_id
                  INNER JOIN patient on patient_id = patient.id
         where doctor_id = #{doctorId} and  yuyue.statue = 0
+    </select>
+    <!--        查询病人自己的预约-->
+    <select id="findselfYuyue" resultMap="YuyueMap">
+        SELECT yuyue.*,
+               doctor.id  as d_id,
+               doctor.doctor_name,
+               doctor.department,
+               doctor.sex as d_sex,
+               patient.id as p_id,
+               patient_name
+        FROM yuyue
+                 INNER JOIN doctor on doctor.id = doctor_id
+                 INNER JOIN patient on patient_id = patient.id
+        where patient_id = #{patientId}
     </select>
     <!--        查询所有的预约-->
     <select id="findallPage" resultMap="YuyueMap">

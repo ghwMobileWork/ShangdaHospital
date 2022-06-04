@@ -35,4 +35,5 @@ public class Yuyue {
     private List<Doctor> doctorList;
     @TableField(exist = false)
     private List<Patient> patientList;
+
 }

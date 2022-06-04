@@ -41,11 +41,8 @@
 				patientname:''
 			}
 		},
-		created() {
-		    this.sex=JSON.parse(sessionStorage.getItem('user')).sex.toString()
-			this.username= JSON.parse(sessionStorage.getItem('user')).username.toString(),
-			this.patientname=JSON.parse(sessionStorage.getItem('user')).patientName.toString()
-			this.load()
+		onLoad() {
+		   this.load()
 			// console.log(JSON.parse(sessionStorage.getItem('user')).sex.toString())
 			// console.log(JSON.parse(sessionStorage.getItem('user')).username.toString())
 			// console.log(JSON.parse(sessionStorage.getItem('user')).patientName.toString())
@@ -53,6 +50,13 @@
 		  },
 		methods: {
 			load() {
+				this.imgsrc=''
+				this.username=''
+				this.patientname=''
+				this.sex=''
+				this.sex=JSON.parse(sessionStorage.getItem('user')).sex.toString()
+				this.username= JSON.parse(sessionStorage.getItem('user')).username.toString(),
+				this.patientname=JSON.parse(sessionStorage.getItem('user')).patientName.toString()
 				//获取用户名、头像等信息
 				//如果判断为男生则img设为男生的头像
 				if (this.sex==='男') {
@@ -67,7 +71,7 @@
 			},
 			exit(){
 			sessionStorage.clear()
-			uni.navigateTo({
+			uni.reLaunch({
 				url:"../Login/Login"
 			})
 			}

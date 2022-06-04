@@ -20,8 +20,9 @@ public class YuyueController {
     @Resource
     YuyueMapper yuyueMapper;
 
-    @PostMapping("/insert")
+    @PostMapping("/newyuyue")
     public Result<?> save(@RequestBody Yuyue yuyue) {
+        System.out.println(yuyue);
         yuyueMapper.insert(yuyue);
         return Result.success();
     }
@@ -54,6 +55,19 @@ public class YuyueController {
 //        Page<Yuyue> yuyuePage = yuyueMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(yuyuePage);
     }
+    //病人根据自己的id查看预约自己的预约历史
+    @GetMapping("/loadyuyue")
+    public Result<?> loadYuyue(
+                              @RequestParam(defaultValue = "") Integer search) {
+
+//        LambdaQueryWrapper<Yuyue> wrapper=Wrappers.<Yuyue>lambdaQuery();
+//        if (StrUtil.isNotBlank(search)){
+//            wrapper.eq(Yuyue::getDoctorId,search);
+//        }
+        ArrayList<Yuyue> yuyuePage = yuyueMapper.findselfYuyue(search);
+//        Page<Yuyue> yuyuePage = yuyueMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(yuyuePage);
+    }
     @GetMapping("/loadall")
     public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize)
@@ -77,4 +91,5 @@ public class YuyueController {
         Page<Yuyue> yuyuePage = yuyueMapper.findBypatientname(new Page<>(pageNum, pageSize), search);
         return Result.success(yuyuePage);
     }
+
 }
