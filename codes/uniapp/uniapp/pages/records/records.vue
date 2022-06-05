@@ -70,6 +70,7 @@
 		onLoad() {
 			this.load()
 		},
+		
 		onPullDownRefresh() {
 			this.load()
 			uni.stopPullDownRefresh()

@@ -12,7 +12,7 @@
 				<image src="../../static/icons/doctor.png" class="img-80"></image>
 				<view class="grid-text" style="font-size: 35upx;">预约挂号</view>
 			</u-grid-item>
-			<u-grid-item >
+			<u-grid-item @tap="todaozhen()">
 				<image  src="../../static/icons/daozhen.png" class="img-80"></image>
 				<view class="grid-text" style="font-size: 35upx;">自助导诊</view>
 			</u-grid-item>
@@ -58,6 +58,11 @@
 		torecords(){
 			uni.navigateTo({
 				url:"../records/records"
+			})
+		},
+		todaozhen(){
+			uni.navigateTo({
+				url:"../daozhen/daozhen"
 			})
 		}
 		}

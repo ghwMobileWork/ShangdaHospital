@@ -88,6 +88,16 @@
             }
             
         }
+        ,{
+            "path" : "pages/daozhen/daozhen",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<u-navbar title="预约挂号" :background="background"></u-navbar>
+		<u-navbar title="预约挂号" :background="background" ></u-navbar>
 		<u-notice-bar mode="vertical" :list="tishi"></u-notice-bar>
 
 		<view>
@@ -186,6 +186,7 @@
 					}
 				}
 			},
+			
 			load(){
 				this.current = 0
 				this.swiperCurrent = 0
@@ -232,6 +233,7 @@
 			}
 		}
 	}
+	
 </script>
 
 <style scoped lang="scss">
