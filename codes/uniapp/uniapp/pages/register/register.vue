@@ -1,5 +1,5 @@
 <template>
-	<view class="login" style="margin-top: 100upx;">
+	<view class="login" style="padding-top: 100upx;">
 		<view class="top_item">
 			<text style="color: #000000;font-size: 22px;font-weight: bold;">欢迎注册！</text>
 		</view>

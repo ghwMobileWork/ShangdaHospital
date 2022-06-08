@@ -13,7 +13,7 @@
 		</view>
 		<view class="duihua2">
 			<view class="" style="display: flex;flex-direction: column;flex-wrap:nowrap;padding-top: 20upx;">
-				<button v-if="choose_show" v-for="(item,index) in myhuida" type="default" class="huida" @tap="ans(index)">{{item}}</button>
+				<button v-if="choose_show" v-for="(item,index) in myhuida" type="default" :class="huida_c" @tap="ans(index)">{{item}}</button>
 				<button v-if="result_show"  type="default" class="" >{{item}}</button>
 				<!-- <button v-if="buzhou[1]===true" v-for="(item,index) in answer2[0]" type="default">{{item}}</button> -->
 				
@@ -72,6 +72,7 @@
 				//结果列表的索引
 				q1:-1,
 				q2:-1,
+				huida_c:'huidabig'
 			}
 		},
 		onLoad(){
@@ -86,19 +87,21 @@
 				this.yisheng[2]='建议您挂'
 			},
 		ans(idx){
-			console.log(idx);
+			// console.log(idx);
 			
 			if(this.current==0){
 				//回答了第一个问题
 				this.myhuida=this.answer2[idx]
+				this.huida_c='huida'
 				this.p1=idx
-				this.current=this.current+1
+				this.current+=1
 			}else if(this.current==1){
 				//回答了第二个问题
 				this.myhuida=this.answer3
+				this.huida_c='huidabig'
 				this.p2=idx
 				this.yisheng[2]=this.yisheng[2]+'['+this.result[this.p1][this.p2]+']进一步查看！'
-				this.current=this.current+1
+				this.current+=1
 			}
 			else if(this.current=2){
 				//回答了第三个问题
@@ -128,8 +131,9 @@
 	color: #555555;
 	border-radius: 25px;
 	background-color:#B0E2FF;
-	padding-left: 20upx;
-	padding-top: 20upx;
+	/* padding-left: 20upx; */
+	padding: 20upx;
+	/* padding-top: 20upx; */
 	margin-top: 10upx;
 	height: 250upx;
 	width: 720upx;
@@ -152,5 +156,13 @@
 	width: 680upx;
 	margin-top: 10upx;
 	height: 150upx;
+}
+.huidabig{
+	font-size: 40upx;
+	border-radius: 25upx;
+	background-color: #e5dfdb;
+	width: 680upx;
+	margin-top: 10upx;
+	height: 100upx;
 }
 </style>

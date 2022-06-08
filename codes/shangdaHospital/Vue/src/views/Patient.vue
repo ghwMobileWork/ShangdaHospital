@@ -1,11 +1,10 @@
 <template>
   <div style="padding: 10px">
     <!--    功能区域-->
-    <div>
-      <el-button type="primary" @click="add">新增病人</el-button>
-      <el-button type="primary">导入</el-button>
-      <el-button type="primary">删除</el-button>
-    </div>
+<!--    <div>-->
+<!--      <el-button type="primary" @click="add">新增病人</el-button>-->
+
+<!--    </div>-->
     <!--    搜索区域-->
     <div style="margin: 10px 0">
       <el-input v-model="search" placeholder="请输入关键字" style="width: 20%" clearable/>
@@ -54,7 +53,7 @@
           <el-input v-model="form.username" style="width: 80%"/>
         </el-form-item>
         <el-form-item label="姓名">
-          <el-input v-model="form.realName" style="width: 80%"/>
+          <el-input v-model="form.patientName" style="width: 80%"/>
         </el-form-item>
         <el-form-item label="性别">
           <el-radio v-model="form.sex" label="男">男</el-radio>
@@ -157,6 +156,7 @@ export default {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogVisible = true
       console.log(row)
+      this.load()
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
@@ -184,7 +184,7 @@ export default {
         this.load() //删除之后重新加载数据
       })
     },querry() {
-      request.get("/yuyue/findbyname",
+      request.get("/patient/findbyname",
           {
             params: {
               pageNum: this.currentPage,

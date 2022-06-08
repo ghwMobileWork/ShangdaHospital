@@ -1,5 +1,5 @@
 <template>
-	<view class="login" style="margin-top: 100upx;">
+	<view class="login" style="padding-top: 190upx;">
 		<view class="top_item">
 			<text style="color: #000000;font-size: 22px;font-weight: bold;">欢迎使用，商大医院！</text>
 		</view>
@@ -10,7 +10,7 @@
 			</u-form-item>
 			<u-form-item label="" style="margin-left: 40upx;">
 				<image src="../../static/icons/password.png" style="width: 60upx;height: 60upx;"></image>
-				<u-input v-model="form.password" style="margin-left: 40upx;" />
+				<u-input v-model="form.password" style="margin-left: 40upx;" type="password"/>
 			</u-form-item>
 
 

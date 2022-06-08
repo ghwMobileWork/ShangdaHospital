@@ -20,6 +20,7 @@ public class YuyueController {
     @Resource
     YuyueMapper yuyueMapper;
 
+    //病人预约挂号
     @PostMapping("/newyuyue")
     public Result<?> save(@RequestBody Yuyue yuyue) {
         System.out.println(yuyue);
@@ -27,14 +28,16 @@ public class YuyueController {
         return Result.success();
     }
 
+    //医生会诊
     //预约表statue设1，result为诊断结果
     @PutMapping("/zhenduan")
     public Result<?> zhenduan(@RequestBody Yuyue yuyue) {
-        System.out.println("结果："+yuyue.getResult());
+//        System.out.println("结果："+yuyue.getResult());
         yuyue.setStatue(1);
         yuyueMapper.updateById(yuyue);
         return Result.success();
     }
+    //删除一条预约记录
     @DeleteMapping("/delete/{id}")
     public Result<?> delete(@PathVariable Long id) {
         yuyueMapper.deleteById(id);
@@ -68,6 +71,7 @@ public class YuyueController {
 //        Page<Yuyue> yuyuePage = yuyueMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
         return Result.success(yuyuePage);
     }
+    //管理员获取所有预约记录
     @GetMapping("/loadall")
     public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize)
@@ -79,6 +83,7 @@ public class YuyueController {
 
         return Result.success(yuyuePage);
     }
+    //通过病人姓名查询预约记录
     @GetMapping("/findbyname")
     public Result<?> findByname(@RequestParam(defaultValue = "1") Integer pageNum,
                               @RequestParam(defaultValue = "10") Integer pageSize,

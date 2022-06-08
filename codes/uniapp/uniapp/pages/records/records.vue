@@ -31,7 +31,7 @@
 				</view>
 				<u-top-tips ref="uTips"></u-top-tips>
 				<u-modal v-model="show" title="诊断结果"  >
-					<view class="slot-content" >
+					<view class="slot-content" style="padding: 20upx;">
 									<rich-text :nodes="content"></rich-text>
 								</view>
 				</u-modal>

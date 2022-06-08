@@ -427,8 +427,11 @@ export default {
 		},
 		// 设置picker的某一列值
 		setYears() {
+			//以下为修改代码
+			var nowyear = new Date().getFullYear();
+			this.years = this.generateArray(nowyear, nowyear);
 			// 获取年份集合
-			this.years = this.generateArray(this.startYear, this.endYear);
+			// this.years = this.generateArray(this.startYear, this.endYear);
 			// 设置this.valueArr某一项的值，是为了让picker预选中某一个值
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.years, this.year));
 		},

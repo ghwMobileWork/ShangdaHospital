@@ -1,23 +1,15 @@
 package com.gaogao.houduan;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
-import com.gaogao.houduan.common.Result;
 import com.gaogao.houduan.entity.Doctor;
 import com.gaogao.houduan.mapper.DoctorMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import javax.annotation.Resource;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
+
 @SpringBootTest
-public class DoctorTests {
+public class PatientTests {
     @Resource
     DoctorMapper doctorMapper;
 

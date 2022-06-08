@@ -26,7 +26,8 @@
 			"style": {
 				"backgroundColor": "#f1f1f1",
 				"navigationBarTitleText": "我",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"scrollIndicator": "none"
 			}
 
 		}, {
@@ -38,17 +39,8 @@
 				"enablePullDownRefresh":true
 			}
 
-		}, {
-			"path": "pages/testaxios/testaxios",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-
-
-	    ,{
+		},
+		{
             "path" : "pages/register/register",
             "style" :                                                                                    
             {
@@ -57,17 +49,8 @@
 				"navigationStyle": "custom"
             }
             
-        }
-        ,{
-            "path" : "pages/testform/testform",
-            "style" :                                                                                    
-            {
-                "navigationBarTitleText": "",
-                "enablePullDownRefresh": false
-            }
-            
-        }
-        ,{
+        },
+		{
             "path" : "pages/introduce/introduce",
             "style" :                                                                                    
             {

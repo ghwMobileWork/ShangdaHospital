@@ -7,11 +7,10 @@
 			<u-tabs-swiper ref="uTabs" :list="dptlist" :current="current" @change="tabsChange" :is-scroll="true"
 				swiperWidth="750" bg-color="#eeeeee"></u-tabs-swiper>
 		</view>
-		<view style="height:20rpx;width: 100%;">
+		<view style="height:800upx;width: 100%;">
 			<swiper :current="swiperCurrent" @transition="transition" @animationfinish="animationfinish">
-				<swiper-item style="width: 100%;" class="swiper-item" v-for="(item, index) in tabs" :key="index">
+				<swiper-item style="width: 100%;height: 1000upx;" class="swiper-item" v-for="(item, index) in tabs" :key="index">
 					<scroll-view scroll-y style="height:100%;width: 100%;" @scrolltolower="onreachBottom">
-
 						<view class="item u-border-bottom" v-for="(itm, idx) in item" :key="idx">
 							<image v-if="tabs[index][idx].sex==='男'" src="../../static/icons/mandoct.png"
 								class="img-80" />
@@ -28,7 +27,6 @@
 				</swiper-item>
 			</swiper>
 		</view>
-
 		<u-picker  mode="time" :end-year="endyear" :start-year="startyear" v-model="show" @confirm="confirm" @change="change"
 			:params="params"></u-picker>
 			<u-toast ref="uToast" />
@@ -257,6 +255,6 @@
 		line-height: 80rpx;
 		border-radius: 8rpx;
 	}
-
+	
 	
 </style>
