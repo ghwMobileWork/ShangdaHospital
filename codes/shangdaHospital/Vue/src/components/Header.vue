@@ -13,12 +13,13 @@
     </span>
         <template #dropdown>
           <el-dropdown-menu>
-            <el-dropdown-item @click="$router.push('/personal')">个人信息</el-dropdown-item>
+<!--            <el-dropdown-item @click="$router.push('/personal')">个人信息</el-dropdown-item>-->
             <el-dropdown-item @click="exit">退出系统</el-dropdown-item>
           </el-dropdown-menu>
         </template>
       </el-dropdown>
     </div>
+
   </div>
 </template>
 
@@ -29,15 +30,17 @@ export default {
   // nickName: JSON.parse(sessionStorage.getItem('user')).nickName,
   data(){
     return{
-      doctorName: JSON.parse(sessionStorage.getItem('user')).doctorName.toString()
+      doctorName: JSON.parse(sessionStorage.getItem('user')).doctorName.toString(),
       //sessionStorage.getItem()输入的参数是key，获取的是他的value,本例返回的是一个json字符串
+
     }
   },
   methods:{
     exit(){
       sessionStorage.clear();
       this.$router.push('/login')
-    }
+    },
+
   }
 
 }

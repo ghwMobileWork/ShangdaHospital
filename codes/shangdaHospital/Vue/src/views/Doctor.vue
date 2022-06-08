@@ -3,8 +3,8 @@
     <!--    功能区域-->
     <div>
       <el-button type="primary" @click="add">新增医生</el-button>
-      <el-button type="primary">导入</el-button>
-      <el-button type="primary">删除</el-button>
+
+
     </div>
     <!--    搜索区域-->
     <div style="margin: 10px 0">
@@ -69,6 +69,9 @@
             <el-option label="内科" value="内科" />
             <el-option label="妇科" value="妇科" />
             <el-option label="骨科" value="骨科" />
+            <el-option label="外科" value="外科" />
+            <el-option label="耳鼻喉科" value="耳鼻喉科" />
+            <el-option label="眼科" value="眼科" />
           </el-select>
         </el-form-item>
       </el-form>
@@ -100,7 +103,7 @@ export default {
       pageSize: 10,
       total: 0,
       tableData: [],
-
+      department: [],
     }
 
   },
@@ -122,6 +125,7 @@ export default {
         this.tableData = res.data.records
         this.total = res.data.total
       })
+
     },
     save() {
       if (this.form.id) {
@@ -170,6 +174,7 @@ export default {
       this.form = JSON.parse(JSON.stringify(row))
       this.dialogVisible = true
       console.log(row)
+      this.load()
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize
@@ -198,7 +203,7 @@ export default {
       })
     },
     querry() {
-      request.get("/yuyue/findbyname",
+      request.get("/doctor/findbyname",
           {
             params: {
               pageNum: this.currentPage,

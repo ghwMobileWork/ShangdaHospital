@@ -26,27 +26,62 @@
 			"style": {
 				"backgroundColor": "#f1f1f1",
 				"navigationBarTitleText": "我",
-				"navigationStyle": "custom"
+				"navigationStyle": "custom",
+				"scrollIndicator": "none"
 			}
 
 		}, {
 			"path": "pages/yuyuegua/yuyuegua",
 			"style": {
 				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
+				"enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"enablePullDownRefresh":true
 			}
 
-		}, {
-			"path": "pages/testaxios/testaxios",
-			"style": {
-				"navigationBarTitleText": "",
-				"enablePullDownRefresh": false
-			}
-
-		}
-
-
-	],
+		},
+		{
+            "path" : "pages/register/register",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        },
+		{
+            "path" : "pages/introduce/introduce",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+        ,{
+            "path" : "pages/records/records",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom",
+				"enablePullDownRefresh":true
+            }
+            
+        }
+        ,{
+            "path" : "pages/daozhen/daozhen",
+            "style" :                                                                                    
+            {
+                "navigationBarTitleText": "",
+                "enablePullDownRefresh": false,
+				"navigationStyle": "custom"
+            }
+            
+        }
+    ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "uni-app",

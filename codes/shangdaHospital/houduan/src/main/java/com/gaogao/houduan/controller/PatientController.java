@@ -33,6 +33,7 @@ public class PatientController {
 //        doctorMapper.insert(doctor);
 //        return Result.success();
 //    }
+    //病人登陆
     @PostMapping("/login")
     public Result<?> login(@RequestBody Patient patient) {
         Patient res = patientMapper.selectOne(Wrappers.<Patient>lambdaQuery().eq(Patient::getUsername, patient.getUsername()).eq(Patient::getPassword, patient.getPassword()));
@@ -41,49 +42,53 @@ public class PatientController {
         }
         return Result.success(res);
     }
-//    @PostMapping("/register")
-//    public Result<?> register(@RequestBody Doctor doctor) {
-//        Doctor res = doctorMapper.selectOne(Wrappers.<Doctor>lambdaQuery().eq(Doctor::getUsername, doctor.getUsername()));
-//        if (res!=null){
-//            return Result.error("-1","用户名已存在");
-//        }
-//
-//        doctorMapper.insert(doctor);
-//        return Result.success();
-//    }
+    //病人注册
+    @PostMapping("/register")
+    public Result<?> register(@RequestBody Patient patient) {
+        Patient res = patientMapper.selectOne(Wrappers.<Patient>lambdaQuery().eq(Patient::getUsername, patient.getUsername()));
+        if (res!=null){
+            return Result.error("-1","用户名已存在");
+        }
 
-//    @PutMapping
-//    public Result<?> update(@RequestBody Patient patient) {
-//        patientMapper.updateById(patient);
-//        return Result.success();
-//    }
-//    @DeleteMapping("/delete/{id}")
-//    public Result<?> delete(@PathVariable Long id) {
-//        patientMapper.deleteById(id);
-//        return Result.success();
-//    }
-//
-//
-//    @GetMapping("/loadall")
-//    public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
-//                             @RequestParam(defaultValue = "10") Integer pageSize)
-//    {
-//
-//        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
-//        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
-//        return Result.success(patientPage);
-//    }
-//    @GetMapping("/findbyname")
-//    public Result<?> findByname(@RequestParam(defaultValue = "1") Integer pageNum,
-//                                @RequestParam(defaultValue = "10") Integer pageSize,
-//                                @RequestParam(defaultValue = "") String search) {
-//
-//        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
-//        if (StrUtil.isNotBlank(search)){
-//            wrapper.eq(Patient::getPatientName,search);
-//        }
-//        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
-//        return Result.success(patientPage);
-//    }
+        patientMapper.insert(patient);
+        return Result.success();
+    }
+
+    //修改病人信息
+    @PutMapping
+    public Result<?> update(@RequestBody Patient patient) {
+        patientMapper.updateById(patient);
+        return Result.success();
+    }
+    //删除病人
+    @DeleteMapping("/delete/{id}")
+    public Result<?> delete(@PathVariable Long id) {
+        patientMapper.deleteById(id);
+        return Result.success();
+    }
+
+    //加载所有病人信息
+    @GetMapping("/loadall")
+    public Result<?> loadAll(@RequestParam(defaultValue = "1") Integer pageNum,
+                             @RequestParam(defaultValue = "10") Integer pageSize)
+    {
+
+        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
+        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(patientPage);
+    }
+    //通过姓名查询病人
+    @GetMapping("/findbyname")
+    public Result<?> findByname(@RequestParam(defaultValue = "1") Integer pageNum,
+                                @RequestParam(defaultValue = "10") Integer pageSize,
+                                @RequestParam(defaultValue = "") String search) {
+
+        LambdaQueryWrapper<Patient> wrapper=Wrappers.<Patient>lambdaQuery();
+        if (StrUtil.isNotBlank(search)){
+            wrapper.eq(Patient::getPatientName,search);
+        }
+        Page<Patient> patientPage = patientMapper.selectPage(new Page<>(pageNum, pageSize), wrapper);
+        return Result.success(patientPage);
+    }
 
 }

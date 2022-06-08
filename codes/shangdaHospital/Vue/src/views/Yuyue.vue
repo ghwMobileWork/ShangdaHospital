@@ -14,7 +14,7 @@
     <el-table :data="tableData" stripe style="width: 100%">
       <el-table-column prop="id" label="ID" sortable/>
       <el-table-column prop="patientList[0].patientName" label="病人姓名"/>
-      <el-table-column prop="patientList[0].sex" label="病人性别"/>
+<!--      <el-table-column prop="patientList[0].sex" label="病人性别"/>-->
       <el-table-column prop="doctorList[0].doctorName" label="医生姓名"/>
       <el-table-column prop="time" label="预约时间"/>
       <el-table-column prop="doctorList[0].department" label="科室"/>
@@ -193,6 +193,7 @@ export default {
       this.zhenduanform = JSON.parse(JSON.stringify(row))
       this.dialogVisible = true
       console.log(row)
+      this.load()
     },
     handleSizeChange(pageSize) {
       this.pageSize = pageSize

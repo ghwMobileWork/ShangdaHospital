@@ -427,18 +427,61 @@ export default {
 		},
 		// 设置picker的某一列值
 		setYears() {
+			//以下为修改代码
+			var nowyear = new Date().getFullYear();
+			this.years = this.generateArray(nowyear, nowyear);
 			// 获取年份集合
-			this.years = this.generateArray(this.startYear, this.endYear);
+			// this.years = this.generateArray(this.startYear, this.endYear);
 			// 设置this.valueArr某一项的值，是为了让picker预选中某一个值
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.years, this.year));
 		},
 		setMonths() {
-			this.months = this.generateArray(1, 12);
+			// this.months = this.generateArray(1, 12);
+			let totalDays = new Date(this.year, this.month, 0).getDate();
+			let nowaday = new Date().getDate();
+			let nowmonth = new Date().getMonth()+1;//现在的月份
+			if(totalDays-nowaday<7){
+				if(nowmonth==12){
+					this.months = this.generateArray(nowmonth,nowmonth);
+				}else{
+					this.months = this.generateArray(nowmonth,nowmonth+1);
+				}
+				
+			}else{
+				this.months = this.generateArray(nowmonth,nowmonth);
+			}
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.months, this.month));
 		},
 		setDays() {
+			//能预约7天内的日期
 			let totalDays = new Date(this.year, this.month, 0).getDate();
-			this.days = this.generateArray(1, totalDays);
+			let lasttotalDays = new Date(this.year, this.month-1, 0).getDate();
+			let nowaday = new Date().getDate();
+			let nowmonth = new Date().getMonth()+1;//现在的月份
+			if(this.month>nowmonth){
+			let shengde = 7-lasttotalDays+nowaday
+			this.days = this.generateArray(1, shengde);
+			// console.log(shengde);
+			}
+			else if(this.month==nowmonth&&totalDays-nowaday>7)
+			{
+				this.days = this.generateArray(nowaday+1, nowaday+7);
+			}
+			else{
+				this.days = this.generateArray(nowaday+1, totalDays);
+			}
+			// if(totalDays-nowaday<7){
+			// 	this.days = this.generateArray(nowmonth,nowmonth+1);
+			// }else{
+			// 	this.months = this.generateArray(nowmonth,nowmonth);
+			// }
+			// this.days = this.generateArray(1, totalDays);
+			// if(this.month!=(new Date().getMonth()+1)){
+			// 	this.days = this.generateArray(1, totalDays);
+			// }else{
+			// 	this.days = this.generateArray(new Date().getDate()+1, totalDays);
+			// }
+			
 			let index = 0;
 			// 这里不能使用类似setMonths()中的this.valueArr.splice(this.valueArr.length - 1, xxx)做法
 			// 因为this.month和this.year变化时，会触发watch中的this.setDays()，导致this.valueArr.length计算有误
@@ -452,7 +495,8 @@ export default {
 			this.valueArr.splice(index, 1, this.getIndex(this.days, this.day));
 		},
 		setHours() {
-			this.hours = this.generateArray(0, 23);
+			// this.hours = this.generateArray(0, 23);
+			this.hours = this.generateArray(8, 16);
 			this.valueArr.splice(this.valueArr.length - 1, 1, this.getIndex(this.hours, this.hour));
 		},
 		setMinutes() {
