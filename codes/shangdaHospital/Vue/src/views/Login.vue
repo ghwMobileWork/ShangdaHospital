@@ -48,6 +48,9 @@ export default {
     }
 
   },
+  mounted() {
+    document.title="商大医院"
+  },
   methods:{
     login(){
       request.post("/doctor/login",this.form).then(res=>{
