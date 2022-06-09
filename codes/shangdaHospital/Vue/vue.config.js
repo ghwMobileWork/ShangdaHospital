@@ -10,7 +10,7 @@ module.exports = {
                 // ws:true,//代理websocked
 =======
             '/api': {              //设置拦截器  拦截器格式   斜杠+拦截器名字，名字可以自己定
-                target: 'http://localhost:9090',     //代理的目标地址
+                target: 'http://47.99.98.84:9090',     //代理的目标地址
                 autoOpenBrowser:true,
 >>>>>>> 62477e394627a6ab02f3b0705df3476793fbe6c8
                 changeOrigin: true,              //是否设置同源，输入是的
