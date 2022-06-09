@@ -29,15 +29,15 @@ public class DoctorController {
         return Result.success(res);
     }
 
-//    @PostMapping("/register")
-//    public Result<?> register(@RequestBody Doctor doctor) {
-//        Doctor res = doctorMapper.selectOne(Wrappers.<Doctor>lambdaQuery().eq(Doctor::getUsername, doctor.getUsername()));
-//        if (res!=null){
-//            return Result.error("-1","用户名已存在");
-//        }
-//        doctorMapper.insert(doctor);
-//        return Result.success();
-//    }
+    @PostMapping("/register")
+    public Result<?> register(@RequestBody Doctor doctor) {
+        Doctor res = doctorMapper.selectOne(Wrappers.<Doctor>lambdaQuery().eq(Doctor::getUsername, doctor.getUsername()));
+        if (res!=null){
+            return Result.error("-1","用户名已存在");
+        }
+        doctorMapper.insert(doctor);
+        return Result.success();
+    }
     //修改医生信息
     @PutMapping
     public Result<?> update(@RequestBody Doctor doctor) {

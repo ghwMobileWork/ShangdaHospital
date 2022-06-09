@@ -191,7 +191,7 @@
 				this.tabs = []
 				this.dptlist = []
 				this.userid=JSON.parse(sessionStorage.getItem('user')).id
-				//获取各科室医生的信息存入doctors
+				//获取医生的信息存入doctors
 				request.get("/doctor/loadall", {
 					params: {
 						pageNum: 1,

@@ -257,7 +257,7 @@ var render = function() {
     "v-uni-view",
     {
       staticClass: _vm._$g(0, "sc"),
-      staticStyle: { "margin-top": "100upx" },
+      staticStyle: { "padding-top": "190upx" },
       attrs: { _i: 0 }
     },
     [
@@ -6111,7 +6111,7 @@ var render = function() {
       ),
       _c(
         "v-uni-view",
-        { staticStyle: { height: "20rpx", width: "100%" }, attrs: { _i: 5 } },
+        { staticStyle: { height: "800upx", width: "100%" }, attrs: { _i: 5 } },
         [
           _c(
             "v-uni-swiper",
@@ -6132,7 +6132,7 @@ var render = function() {
                 {
                   key: item,
                   staticClass: _vm._$g("7-" + $30, "sc"),
-                  staticStyle: { width: "100%" },
+                  staticStyle: { width: "100%", height: "1000upx" },
                   attrs: { _i: "7-" + $30 }
                 },
                 [
@@ -8551,7 +8551,7 @@ var render = function() {
     "v-uni-view",
     {
       staticClass: _vm._$g(0, "sc"),
-      staticStyle: { "margin-top": "100upx" },
+      staticStyle: { "padding-top": "100upx" },
       attrs: { _i: 0 }
     },
     [

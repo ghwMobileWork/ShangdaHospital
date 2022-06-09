@@ -1,0 +1,26 @@
+-------------------------------------------------------------------------------
+Test set: com.gaogao.houduan.PatientTests
+-------------------------------------------------------------------------------
+Tests run: 1, Failures: 0, Errors: 1, Skipped: 0, Time elapsed: 1.068 s <<< FAILURE! - in com.gaogao.houduan.PatientTests
+loginTest  Time elapsed: 1.059 s  <<< ERROR!
+org.mybatis.spring.MyBatisSystemException: 
+nested exception is org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+### The error may exist in com/gaogao/houduan/mapper/DoctorMapper.java (best guess)
+### The error may involve com.gaogao.houduan.mapper.DoctorMapper.selectOne
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+	at com.gaogao.houduan.PatientTests.loginTest(PatientTests.java:23)
+Caused by: org.apache.ibatis.exceptions.PersistenceException: 
+
+### Error querying database.  Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+### The error may exist in com/gaogao/houduan/mapper/DoctorMapper.java (best guess)
+### The error may involve com.gaogao.houduan.mapper.DoctorMapper.selectOne
+### The error occurred while executing a query
+### Cause: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+	at com.gaogao.houduan.PatientTests.loginTest(PatientTests.java:23)
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException: Failed to obtain JDBC Connection; nested exception is java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+	at com.gaogao.houduan.PatientTests.loginTest(PatientTests.java:23)
+Caused by: java.sql.SQLSyntaxErrorException: Unknown database 'shangda_hospital'
+	at com.gaogao.houduan.PatientTests.loginTest(PatientTests.java:23)
+

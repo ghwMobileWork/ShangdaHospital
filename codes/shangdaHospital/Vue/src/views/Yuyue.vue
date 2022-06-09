@@ -158,6 +158,7 @@ export default {
               type: "success",
               message: "诊断完成"
             })
+            this.load()
           } else {
             this.$message({
               type: "error",
@@ -165,25 +166,8 @@ export default {
             })
           }
         })
-
-      //  else {
-      //   request.post("/yuyue", this.form).then(res => {
-      //     console.log(res)
-      //     if (res.code === '0') {
-      //       this.$message({
-      //         type: "success",
-      //         message: "新增成功"
-      //       })
-      //     } else {
-      //       this.$message({
-      //         type: "error",
-      //         message: "新增失败"
-      //       })
-      //     }
-      //   })
-      // }
       this.dialogVisible = false
-      this.load()
+
     },
     add() {
       this.dialogVisible = true;
