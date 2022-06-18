@@ -43,7 +43,7 @@
 		
 				request.post("/patient/login", this.form).then(res => {
 					console.log(res)
-				
+					//uni.request
 					if (res.code === '0') {
 						sessionStorage.setItem("user", JSON.stringify(res.data))
 						//缓存用户信息，注意session的key是user
